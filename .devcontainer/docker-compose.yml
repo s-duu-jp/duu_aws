@@ -1,0 +1,18 @@
+version: "3"
+networks:
+  duu_aws_network:
+    driver: bridge
+services:
+  app:
+    container_name: duu_aws_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sleep infinity
+    environment:
+      TZ: Asia/Tokyo
+    networks:
+      - duu_aws_network
+    volumes:
+      - ..:/workspace:cached
+      - ~/.ssh:/home/vscode/.ssh
