@@ -16,3 +16,8 @@ services:
     volumes:
       - ..:/workspace:cached
       - ~/.ssh:/home/vscode/.ssh
+      - duu_aws_frontend_web_next:/workspace/frontend/web/.next
+      - duu_aws_frontend_web_node_modules:/workspace/frontend/web/node_modules
+volumes:
+  duu_aws_frontend_web_next:
+  duu_aws_frontend_web_node_modules:

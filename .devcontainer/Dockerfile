@@ -15,3 +15,22 @@ RUN if [ "$USER_UID" != "1000" ] || [ "$USER_GID" != "1000" ]; then \
 
 # ワークスペースディレクトリの設定
 WORKDIR /workspace
+
+# Created Web Volume Directory
+RUN mkdir -p /workspace/frontend/web/.next \
+  && mkdir -p /workspace/frontend/web/node_modules
+
+# Node.js Install
+# https://github.com/nvm-sh/nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
+    && sudo chown -R $USERNAME:$USERNAME /root \
+    && echo 'export NVM_DIR="/root/.nvm"' >> /home/$USERNAME/.bashrc \
+    && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /home/$USERNAME/.bashrc \
+    && echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /home/$USERNAME/.bashrc \
+    && . ~/.nvm/nvm.sh \
+    && bash -i -c 'nvm install 20.13.1'
+
+# Bun Install
+RUN curl -fsSL https://bun.sh/install | bash \
+    && sudo chown -R $USERNAME:$USERNAME /root \
+    && echo 'export PATH="/root/.bun/bin:$PATH"' >> /home/$USERNAME/.bashrc
