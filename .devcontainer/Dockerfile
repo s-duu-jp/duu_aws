@@ -34,3 +34,9 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | b
 RUN curl -fsSL https://bun.sh/install | bash \
     && sudo chown -R $USERNAME:$USERNAME /root \
     && echo 'export PATH="/root/.bun/bin:$PATH"' >> /home/$USERNAME/.bashrc
+
+# AWS CLI Install
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && sudo ./aws/install \
+    && rm -rf awscliv2.zip aws
