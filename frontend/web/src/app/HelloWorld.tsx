@@ -1,20 +1,19 @@
 import React from "react";
 import { getBaseUrl } from "../../lib/getBaseUrl";
 import crypto from "crypto";
+import useHttpInterceptor from "../../hooks/useHttpInterceptor";
 
 export default async function HelloWorld() {
+  const fetchWithInterceptor = useHttpInterceptor();
+
   const url = `${getBaseUrl()}/api/sample?delay=3000`;
   const method = "POST";
   const body = JSON.stringify({ message: "Hello, World!" });
 
-  const response = await fetch(url, {
+  const response = await fetchWithInterceptor(url, {
     method,
     headers: {
       "Content-Type": "application/json",
-      "x-amz-content-sha256": crypto
-        .createHash("sha256")
-        .update(body)
-        .digest("hex"),
     },
     body,
     cache: "no-store",
