@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig = {
   output: "standalone",
-  assetPrefix: `${process.env.NEXT_PUBLIC_BASE_URL}/assets`,
+  assetPrefix: isProd
+    ? `${process.env.NEXT_PUBLIC_BASE_URL}/assets`
+    : `${process.env.NEXT_PUBLIC_BASE_URL}`,
   compress: true,
 };
 
