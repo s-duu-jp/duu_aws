@@ -3,9 +3,9 @@ import { useCallback } from "react";
 import crypto from "crypto";
 
 const useHttpInterceptor = () => {
-  return useCallback(async (url, options) => {
+  return useCallback(async (url: string, options: RequestInit) => {
     if (options.method === "POST" || options.method === "PUT") {
-      const body = options.body || "";
+      const body = typeof options.body === "string" ? options.body : "";
       const sha256 = crypto.createHash("sha256").update(body).digest("hex");
       options.headers = {
         ...options.headers,
