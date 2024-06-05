@@ -60,10 +60,8 @@ RUN gem install bundler -v 2.5.9
 ## rails Install
 RUN gem install rails -v 7.1.3
 
-## rails用のPrettier設定 - nodejs Install
-RUN curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
-RUN gem install bundler prettier_print syntax_tree syntax_tree-haml syntax_tree-rbs rubocop
+## rubocop Install
+RUN gem install rubocop
 
 ## permissionの変更
 RUN sudo chown vscode:vscode -R /var/lib/gems

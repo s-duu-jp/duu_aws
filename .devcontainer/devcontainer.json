@@ -26,7 +26,11 @@
           "source.fixAll.eslint"
         ],
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "ruby.format": "rubocop",
+        "[ruby]": {
+          "editor.defaultFormatter": "misogi.ruby-rubocop"
+        }
       },
       "extensions": [
         "eamodio.gitlens",

@@ -26,6 +26,10 @@ EOT
 ## 権限の設定
 chown -R $USER:$USER /home/$USER/.aws
 
+# Frontend Setting
+cd /workspace/frontend/web/
+bun install --frozen-lockfile
+
 # Backend Setting
 cd /workspace/backend/api
 bundle install
