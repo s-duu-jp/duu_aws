@@ -40,3 +40,31 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     && unzip awscliv2.zip \
     && sudo ./aws/install \
     && rm -rf awscliv2.zip aws
+
+# Rails環境のsetup
+## rbenv Install
+RUN sudo apt update && sudo apt install -y rbenv libffi-dev libyaml-dev ruby-dev build-essential libmysqlclient-dev
+RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+RUN echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+RUN . ~/.bashrc
+RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+
+## ruby Install
+RUN rbenv install 3.3.1
+RUN rbenv global 3.3.1
+
+## bundler Install
+RUN gem install bundler -v 2.5.9
+
+## rails Install
+RUN gem install rails -v 7.1.3
+
+## rails用のPrettier設定 - nodejs Install
+RUN curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+RUN sudo apt-get install -y nodejs
+RUN gem install bundler prettier_print syntax_tree syntax_tree-haml syntax_tree-rbs rubocop
+
+## permissionの変更
+RUN sudo chown vscode:vscode -R /var/lib/gems
+RUN sudo chown vscode:vscode -R /usr/local/bin

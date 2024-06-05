@@ -32,7 +32,11 @@
         "eamodio.gitlens",
         "GitHub.copilot",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "misogi.ruby-rubocop",
+        "KoichiSasada.vscode-rdbg",
+        "Shopify.ruby-lsp",
+        "humao.rest-client"
       ]
     }
   }

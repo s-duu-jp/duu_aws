@@ -46,3 +46,8 @@ volumes
 *.rdb
 .env
 !.devcontainer/.env
+
+# backend api
+**/backend/api/bundle
+**/backend/api/tmp
+**/backend/api/log

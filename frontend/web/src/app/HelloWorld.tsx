@@ -6,7 +6,7 @@ import useHttpInterceptor from "../../hooks/useHttpInterceptor";
 export default async function HelloWorld() {
   const fetchWithInterceptor = useHttpInterceptor();
 
-  const url = `${getBaseUrl()}/api/sample?delay=3000`;
+  const url = `${getBaseUrl()}/api/sample?delay=0`;
   const method = "POST";
   const body = JSON.stringify({ message: "Hello, World!" });
 

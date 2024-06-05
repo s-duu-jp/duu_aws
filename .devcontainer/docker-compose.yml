@@ -18,6 +18,24 @@ services:
       - ~/.ssh:/home/vscode/.ssh
       - duu_aws_frontend_web_next:/workspace/frontend/web/.next
       - duu_aws_frontend_web_node_modules:/workspace/frontend/web/node_modules
+  mysql:
+    container_name: duu_aws_mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      TZ: "Asia/Tokyo"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    ports:
+      - "3306:3306"
+    networks:
+      - duu_aws_network
+  redis:
+    container_name: duu_aws_redis
+    image: redis:6.2.4
+    ports:
+      - 6379:6379
+    networks:
+      - duu_aws_network
 volumes:
   duu_aws_frontend_web_next:
   duu_aws_frontend_web_node_modules:
