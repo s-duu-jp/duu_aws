@@ -48,6 +48,6 @@ volumes
 !.devcontainer/.env
 
 # backend api
-**/backend/api/bundle
+**/backend/api/vendor/bundle
 **/backend/api/tmp
 **/backend/api/log
