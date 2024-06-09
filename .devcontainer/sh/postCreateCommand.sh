@@ -33,3 +33,4 @@ bun install --frozen-lockfile
 # Backend Setting
 cd /workspace/backend/api
 bundle install
+rails db:create

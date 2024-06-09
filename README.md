@@ -20,15 +20,6 @@ AWS デプロイ検証用
 
 1. 本リポジトリを git clone します
 
-1. クローン後、以下コマンドでコンテナを起動します。
-
-1. パッケージインストール
-
-   ```bash
-   $ cd /workspace/frontend/web
-   $ bun install --frozen-lockfile
-   ```
-
 ## **サービスの操作**
 
 1. サービス起動
