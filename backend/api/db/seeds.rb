@@ -1,9 +1,17 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Userモデルが存在することを確認します
+# Userモデルがない場合は、適切なモデル名に置き換えてください
+if defined?(User)
+  # 既に存在するユーザーを削除してから新しいユーザーを作成する場合
+  User.destroy_all
+
+  # 初期データを作成します
+  User.create!(
+    id: 1,
+    name: 'admin',
+    age: 41
+  )
+
+  puts "初期ユーザーを作成しました。"
+else
+  puts "Userモデルが見つかりませんでした。"
+end
