@@ -5,7 +5,7 @@ const nextConfig = {
   output: "standalone",
   assetPrefix: isProd
     ? `${process.env.NEXT_PUBLIC_BASE_URL}/assets`
-    : `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    : `${process.env.NEXT_PUBLIC_BASE_URL}:4200`,
   compress: true,
 };
 
