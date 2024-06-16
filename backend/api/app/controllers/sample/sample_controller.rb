@@ -1,4 +1,6 @@
 class Sample::SampleController < ApplicationController
+  include SampleGuard
+
   def index
     # Userモデルからデータを取得します
     user = User.first
