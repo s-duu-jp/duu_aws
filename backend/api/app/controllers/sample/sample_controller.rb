@@ -1,5 +1,11 @@
 class Sample::SampleController < ApplicationController
   def index
-    render json: { message: 'sample' }
+    # Userモデルからデータを取得します
+    user = User.first
+    if user.present?
+      render json: user
+    else
+      render json: { message: 'データが見つかりませんでした' }
+    end
   end
 end
