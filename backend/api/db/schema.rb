@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_16_070950) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_16_110036) do
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.integer "age"
+    t.string "uid", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest"
+    t.string "status_type", null: false
+    t.string "role_type", null: false
+    t.string "oauth_type", null: false
+    t.string "sub"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
 end

@@ -27,10 +27,15 @@
         ],
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
-        "ruby.format": "rubocop",
         "[ruby]": {
-          "editor.defaultFormatter": "misogi.ruby-rubocop"
-        }
+          "editor.rulers": [],
+          "editor.defaultFormatter": "castwide.solargraph"
+        },
+        "solargraph.useBundler": true,
+        "solargraph.diagnostics": true,
+        "solargraph.formatting": true,
+        "solargraph.bundlerPath": "/workspace/backend/api/vendor/bundle/ruby/3.3.0/bin/solargraph",
+        "solargraph.commandPath": "/workspace/backend/api/vendor/bundle/ruby/3.3.0/bin/solargraph"
       },
       "extensions": [
         "eamodio.gitlens",
@@ -40,7 +45,8 @@
         "misogi.ruby-rubocop",
         "KoichiSasada.vscode-rdbg",
         "Shopify.ruby-lsp",
-        "humao.rest-client"
+        "humao.rest-client",
+        "castwide.solargraph"
       ]
     }
   }

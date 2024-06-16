@@ -8,9 +8,11 @@ module SampleGuard
   private
 
   def check_guard
-    return if guard
-
-    render json: { message: 'アクセスが許可されていません' }, status: :forbidden
+    if guard
+      @user = User.first # インスタンス変数の名前を変更
+    else
+      render json: { message: 'アクセスが許可されていません' }, status: :forbidden
+    end
   end
 
   def guard
