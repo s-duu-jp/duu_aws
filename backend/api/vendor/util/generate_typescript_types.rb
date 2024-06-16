@@ -1,11 +1,11 @@
-# USAGE:
-# rails runner rails-models-to-typescript-schema.rb > app/javascript/types/schema.d.ts
+# generate_combined_typescript_types.rb
 
+require 'rails'
+require 'active_model'
+require 'fileutils'
+
+# Railsアプリケーションの環境をロード
 Rails.application.eager_load!
-models = ActiveRecord::Base.descendants.reject { |i| i.abstract_class? }
-
-belongs_to = true
-has_many = true
 
 conversions = {
   "string" => "string",
@@ -24,9 +24,13 @@ conversions = {
   "timestamp" => "string",
   "datetime_with_timezone" => "string"
 }
+
 type_template = ""
 
-models.each do |model|
+# ActiveRecordモデルを処理
+active_record_models = ActiveRecord::Base.descendants.reject { |i| i.abstract_class? }
+
+active_record_models.each do |model|
   name = model.model_name.singular.camelcase
 
   columns = model.columns.map do |i|
@@ -41,7 +45,7 @@ models.each do |model|
     }
   end
 
-  if has_many
+  if model.reflect_on_all_associations.any?
     model.reflect_on_all_associations.select(&:collection?).each do |collection|
       target = collection.compute_class(collection.class_name).model_name.singular.camelcase
 
@@ -50,8 +54,7 @@ models.each do |model|
         ts_type: "#{target}[]"
       }
     end
-  end
-  if has_many
+
     model.reflect_on_all_associations.select(&:has_one?).each do |collection|
       target = collection.compute_class(collection.class_name).model_name.singular.camelcase
 
@@ -60,9 +63,7 @@ models.each do |model|
         ts_type: target
       }
     end
-  end
 
-  if belongs_to
     model.reflect_on_all_associations.select(&:belongs_to?).reject(&:polymorphic?).each do |collection|
       target = collection.compute_class(collection.class_name).model_name.singular.camelcase
 
@@ -76,11 +77,39 @@ models.each do |model|
   type_template += <<~TYPESCRIPT
 
     interface #{name} {
-    #{columns.map { |column| "  #{column[:name]}: #{column[:ts_type]}; " }.join("\n")}
+    #{columns.map { |column| "  #{column[:name]}: #{column[:ts_type]};" }.join("\n")}
     }
   TYPESCRIPT
 rescue ActiveRecord::StatementInvalid => e
   # warn "Skipping model #{model.name} due to missing table: #{e.message}"
+end
+
+# プレーンなActiveModelモデルを処理
+plain_models = ObjectSpace.each_object(Class).select do |klass|
+  klass.included_modules.include?(ActiveModel::Model) && !begin
+    klass < ActiveRecord::Base
+  rescue StandardError
+    false
+  end
+end
+
+plain_models.each do |klass|
+  name = klass.name
+
+  attributes = klass.attribute_types.map do |attr_name, attr_type|
+    type = conversions[attr_type.type.to_s] || "any"
+    {
+      name: attr_name,
+      ts_type: type
+    }
+  end
+
+  type_template += <<~TYPESCRIPT
+
+    interface #{name} {
+    #{attributes.map { |attr| "  #{attr[:name]}: #{attr[:ts_type]};" }.join("\n")}
+    }
+  TYPESCRIPT
 end
 
 template = <<~TPL
