@@ -1,3 +1,4 @@
+# Description: User model that represents the user table in the database.
 class User < ApplicationRecord
   has_secure_password
 

@@ -31,22 +31,20 @@
           "editor.rulers": [],
           "editor.defaultFormatter": "castwide.solargraph"
         },
-        "solargraph.useBundler": true,
+        "solargraph.useBundler": false,
         "solargraph.diagnostics": true,
-        "solargraph.formatting": true,
-        "solargraph.bundlerPath": "/workspace/backend/api/vendor/bundle/ruby/3.3.0/bin/solargraph",
-        "solargraph.commandPath": "/workspace/backend/api/vendor/bundle/ruby/3.3.0/bin/solargraph"
+        "solargraph.formatting": true
       },
       "extensions": [
         "eamodio.gitlens",
         "GitHub.copilot",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "misogi.ruby-rubocop",
+        "castwide.solargraph",
+        "cweijan.vscode-mysql-client2",
         "KoichiSasada.vscode-rdbg",
         "Shopify.ruby-lsp",
-        "humao.rest-client",
-        "castwide.solargraph"
+        "humao.rest-client"
       ]
     }
   }

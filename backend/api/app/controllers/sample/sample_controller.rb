@@ -1,3 +1,4 @@
+# コントローラー
 class Sample::SampleController < ApplicationController
   include SampleGuard
 

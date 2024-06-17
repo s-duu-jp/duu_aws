@@ -48,6 +48,7 @@ volumes
 !.devcontainer/.env
 
 # backend api
+**/backend/api/.yardoc
 **/backend/api/vendor/bundle
 **/backend/api/tmp
 **/backend/api/log

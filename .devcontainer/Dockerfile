@@ -18,7 +18,7 @@ WORKDIR /workspace
 
 # Created Web Volume Directory
 RUN mkdir -p /workspace/frontend/web/.next \
-  && mkdir -p /workspace/frontend/web/node_modules
+    && mkdir -p /workspace/frontend/web/node_modules
 
 # Node.js Install
 # https://github.com/nvm-sh/nvm
@@ -41,18 +41,19 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     && sudo ./aws/install \
     && rm -rf awscliv2.zip aws
 
-# Ruby 3.3.1のインストール
+# Rubyのインストール
+ARG RUBY_VERTION=3.3.1
 RUN apt-get update && \
-apt-get install -y build-essential libssl-dev libreadline-dev zlib1g-dev wget git libffi-dev libyaml-dev libmariadb-dev && \
+    apt-get install -y build-essential libssl-dev libreadline-dev zlib1g-dev wget git libffi-dev libyaml-dev libmariadb-dev && \
     git clone https://github.com/rbenv/ruby-build.git && \
     cd ruby-build && \
     ./install.sh && \
     cd .. && \
     rm -rf ruby-build && \
-    ruby-build 3.3.1 /usr/local/ruby-3.3.1
+    ruby-build ${RUBY_VERTION} /usr/local/ruby-${RUBY_VERTION}
 
 # PATHの設定
-ENV PATH="/usr/local/ruby-3.3.1/bin:${PATH}"
+ENV PATH="/usr/local/ruby-${RUBY_VERTION}/bin:${PATH}"
 
 ## bundler Install
 RUN gem install bundler
@@ -60,5 +61,5 @@ RUN gem install bundler
 ## rails Install
 RUN gem install rails
 
-## rubocop Install
-RUN gem install rubocop
+## solargraph Install
+RUN gem install solargraph

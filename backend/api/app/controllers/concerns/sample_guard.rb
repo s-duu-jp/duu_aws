@@ -1,3 +1,5 @@
+# このモジュールをincludeすると、コントローラーのアクションが実行される前に
+# check_guardメソッドが実行されます。
 module SampleGuard
   extend ActiveSupport::Concern
 
@@ -9,7 +11,7 @@ module SampleGuard
 
   def check_guard
     if guard
-      @user = User.first # インスタンス変数の名前を変更
+      @user = User.first
     else
       render json: { message: 'アクセスが許可されていません' }, status: :forbidden
     end

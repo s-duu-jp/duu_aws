@@ -51,4 +51,4 @@ gem 'rack', '= 2.2.4'
 
 gem 'bcrypt'
 
-gem "solargraph", "~> 0.50.0", :group => :development
+gem "solargraph", "~> 0.50.0", group: :development
