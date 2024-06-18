@@ -13,7 +13,7 @@ if defined?(User)
     password_digest: '$2a$10$HOn8WTUwZFj6CtT0rOktluNjyLjd1kennkRZWOmKn7TpBXmY7J8Qq'
   )
 
-  puts "初期ユーザーを作成しました。"
+  puts '初期ユーザーを作成しました。'
 else
-  puts "Userモデルが見つかりませんでした。"
+  puts 'Userモデルが見つかりませんでした。'
 end
